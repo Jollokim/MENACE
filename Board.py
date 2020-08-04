@@ -8,3 +8,6 @@ class Board:
 
     def __str__(self):
         return self.spots
+
+    def generate_all_moves(self):
+        pass
