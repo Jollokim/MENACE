@@ -10,4 +10,5 @@ class Board:
         return self.spots
 
     def generate_all_moves(self):
+        print("This will generate all possible moves, and boards")
         pass
