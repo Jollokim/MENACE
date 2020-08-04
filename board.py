@@ -48,7 +48,8 @@ class Board:
                         if self.test_unique(new_move, boards[move_turn + 1]):
                             print(new_move, "is unique")
                             pass
-    #                     append move to list of moves in turn
+    #                     append move to list of moves in next turn
+    # create new move list for second turn
 
 
 
