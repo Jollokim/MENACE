@@ -1,6 +1,6 @@
-import Board, AIPlayer, GameController
+import board, ai_player, game_controller
 
-board = Board.Board()
+board = board.Board()
 
 # player1 = AIPlayer.AIPlayer(board)
 # player2 = None
