@@ -2,8 +2,13 @@ class Board:
     board_len = 9
 
     def __init__(self):
-        self.generate_all_moves()
-
+        # self.generate_all_moves()
+        print(self.format_board(["O", "", "",
+                                 "", "", "O",
+                                 "", "", "X"]))
+        print(self.format_board(self.create_rotation(["O", "", "",
+                                    "", "", "O",
+                                    "", "", "X"], 2)))
 
 
     def generate_all_moves(self):
@@ -16,7 +21,7 @@ class Board:
             ],
             # turn 1 moves
             [
-
+            #     list of boards that can be created in first turn
             ]
         ]
         # print(boards[0] == boards[0])
@@ -102,11 +107,48 @@ class Board:
     def create_vertical_reflection(self, board):
         pass
 
-    def create_rotation(self, board, *args):
-        pass
+    def create_rotation(self, board, rotate=1):
+        rotation_factor = 2
+
+        rotated_board = [""] * Board.board_len
+
+        for i in range(Board.board_len):
+            rotated_board[rotation_factor + i] = board[i]
+
+            # row 1 rules
+            if i < 2:
+                rotation_factor += 2
+            # end of 1 rules
+            elif i == 2:
+                rotation_factor = -2
+            # row 2 rules
+            elif i < 5:
+                rotation_factor += 2
+            # end of row 2 rules
+            elif i == 5:
+                rotation_factor = -6
+            # row 3 rules
+            elif i < 8:
+                rotation_factor += 2
+
+        if rotate > 1:
+            print("rotate again", rotate)
+            print(self.format_board(rotated_board))
+            rotated_board = self.create_rotation(rotated_board, rotate-1)
+
+        return rotated_board
+
 
     def row_complete(self, board):
         pass
 
+    def format_board(self, board):
+        string = ""
+
+        for i in range(3):
+            string += str(board[i*3 :(i+1) * 3]) + "\n"
+
+        return string
+
     def __str__(self):
-        return self.spots
+        pass
