@@ -4,15 +4,17 @@ class Board:
     def __init__(self):
         # self.generate_all_moves()
         test_board = [
-            "X", "O", "X",
-            "X", "O", "O",
+            "", "O", "X",
+            "", "O", "O",
             "X", "O", "X"
         ]
         print(self.format_board(test_board))
 
-        print(self.format_board(
-            self.create_rotation(test_board, 3)
-        ))
+        # print(self.format_board(
+        #     self.create_rotation(test_board, 3)
+        # ))
+
+        print(self.game_complete(test_board))
 
     def generate_all_moves(self):
         print("This will generate all possible moves, and boards")
@@ -118,15 +120,59 @@ class Board:
             elif i < 8:
                 rotation_factor += 2
 
+        # rotate again?
         if rotate > 1:
-            print("rotate again", rotate-1)
+            print("rotate again", rotate - 1)
             print(self.format_board(rotated_board))
             rotated_board = self.create_rotation(rotated_board, rotate - 1)
 
         return rotated_board
 
-    def row_complete(self, board):
-        pass
+    def game_complete(self, board):
+        for i in range(0, 9, 3):
+            h_row = []
+
+            for k in range(3):
+                h_row.append(board[i + k])
+
+            if all([r == "X" for r in h_row]) or all([r == "O" for r in h_row]):
+                print("h_row is completed")
+                return True
+
+        for i in range(3):
+            v_row = []
+
+            for k in range(0, 9, 3):
+                v_row.append(board[i + k])
+
+            if all([r == "X" for r in v_row]) or all([r == "O" for r in v_row]):
+                print("v_row is completed")
+                return True
+
+        cross_factor = 4
+        for i in range(1, 3):
+            cross_row = []
+            cross_factor /= i
+            index = 0
+
+            if cross_factor < 4:
+                index = cross_factor
+
+            for k in range(3):
+                cross_row.append(board[int(index)])
+                index += cross_factor
+
+            if all([r == "X" for r in cross_row]) or all([r == "O" for r in cross_row]):
+                print("cross_row completed")
+                return True
+
+        return False
+
+
+
+
+
+
 
     def format_board(self, board):
         string = ""
