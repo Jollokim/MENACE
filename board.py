@@ -3,13 +3,16 @@ class Board:
 
     def __init__(self):
         # self.generate_all_moves()
-        print(self.format_board(["O", "", "",
-                                 "", "", "O",
-                                 "", "", "X"]))
-        print(self.format_board(self.create_rotation(["O", "", "",
-                                    "", "", "O",
-                                    "", "", "X"], 2)))
+        test_board = [
+            "X", "O", "X",
+            "X", "O", "O",
+            "X", "O", "X"
+        ]
+        print(self.format_board(test_board))
 
+        print(self.format_board(
+            self.create_rotation(test_board, 3)
+        ))
 
     def generate_all_moves(self):
         print("This will generate all possible moves, and boards")
@@ -21,7 +24,7 @@ class Board:
             ],
             # turn 1 moves
             [
-            #     list of boards that can be created in first turn
+                #     list of boards that can be created in first turn
             ]
         ]
         # print(boards[0] == boards[0])
@@ -33,9 +36,7 @@ class Board:
 
         while not done:
 
-
             for moves in range(len(boards[move_turn])):
-
 
                 for spot in range(len(boards[move_turn][moves])):
 
@@ -53,25 +54,16 @@ class Board:
                         if self.test_unique(new_move, boards[move_turn + 1]):
                             print(new_move, "is unique")
                             pass
+
     #                     append move to list of moves in next turn
     # create new move list for second turn
-
-
-
-
-
-
-
-
-
-
 
     def test_unique(self, new_move, moves):
         for move in moves:
             # test reflections of new_move already exist
             if (
-                self.create_horizontal_reflection(new_move) == move or
-                self.create_vertical_reflection(new_move) == move
+                    self.create_horizontal_reflection(new_move) == move or
+                    self.create_vertical_reflection(new_move) == move
             ):
                 return False
 
@@ -95,11 +87,6 @@ class Board:
                 rotated_reflection = self.create_rotation(reflection, 0)
 
             return True
-
-
-
-
-
 
     def create_horizontal_reflection(self, board):
         pass
@@ -132,12 +119,11 @@ class Board:
                 rotation_factor += 2
 
         if rotate > 1:
-            print("rotate again", rotate)
+            print("rotate again", rotate-1)
             print(self.format_board(rotated_board))
-            rotated_board = self.create_rotation(rotated_board, rotate-1)
+            rotated_board = self.create_rotation(rotated_board, rotate - 1)
 
         return rotated_board
-
 
     def row_complete(self, board):
         pass
@@ -146,7 +132,7 @@ class Board:
         string = ""
 
         for i in range(3):
-            string += str(board[i*3 :(i+1) * 3]) + "\n"
+            string += str(board[i * 3:(i + 1) * 3]) + "\n"
 
         return string
 
