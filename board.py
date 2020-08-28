@@ -14,7 +14,11 @@ class Board:
         #     self.create_rotation(test_board, 3)
         # ))
 
-        print(self.game_complete(test_board))
+        print(
+            self.format_board(
+                self.create_horizontal_reflection(test_board)
+            )
+        )
 
     def generate_all_moves(self):
         print("This will generate all possible moves, and boards")
@@ -91,10 +95,31 @@ class Board:
             return True
 
     def create_horizontal_reflection(self, board):
-        pass
+        reflected_board = [""] * Board.board_len
+        # checks line for op to do
+        for i in range(len(board)):
+            if i // 3 == 0:
+                reflected_board[i+6] = board[i]
+            elif i // 3 == 2:
+                reflected_board[i-6] = board[i]
+            else:
+                reflected_board[i] = board[i]
+
+        return reflected_board
 
     def create_vertical_reflection(self, board):
-        pass
+        reflected_board = [""] * Board.board_len
+        # checks line for what op to do
+        for i in range(len(board)):
+            if i % 3 == 0:
+                reflected_board[i+2] = board[i]
+            elif i % 3 == 2:
+                reflected_board[i-2] = board[i]
+            else:
+                reflected_board[i] = board[i]
+
+        return reflected_board
+
 
     def create_rotation(self, board, rotate=1):
         rotation_factor = 2
