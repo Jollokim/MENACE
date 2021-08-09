@@ -33,10 +33,10 @@ class Controller:
 
         if not self.board.grid[row, col]:
             if self.board.playerTurn:
-                self.board.grid[row, col] = 1
+                self.board.grid[row, col] = 2
                 self.board.playerTurn = 0
             else:
-                self.board.grid[row, col] = 2
+                self.board.grid[row, col] = 1
                 self.board.playerTurn = 1
 
         # return if someone won here?
